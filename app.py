@@ -196,6 +196,22 @@ def _build_response(obs) -> dict:
 # =============================================================================
 
 @app.get(
+    "/",
+    tags=["System"],
+    summary="Root endpoint",
+    description="Returns service information and available endpoints.",
+)
+def root():
+    return {
+        "message": "Warehouse Dispatch Environment is running 🚀",
+        "version": "0.1.0",
+        "docs": "/docs",
+        "health": "/health",
+        "endpoints": ["/reset", "/step", "/state", "/health"],
+    }
+
+
+@app.get(
     "/health",
     response_model=HealthResponse,
     tags=["System"],
